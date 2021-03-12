@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import Header from './Compo/Header'
+import React from 'react'
 import './App.css';
+import Sidebar from './Compo/Sidebar';
+import Feed from './Compo/Feed';
+import Widgets from './Compo/Widgets';
+import Login from './Login';
 
 function App() {
+
+  const user= "shree";
+
   return (
+    //BEM naming convention
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {!user ? (<Login/>) : (<>
+        <Header />
+      <div className="app__body">
+        <Sidebar/>
+        <Feed/>
+        <Widgets/>
+         {/* 
+      sidebar 
+      feed 
+      widgets 
+       */}
+
+      </div>
+      </>)}
+
+     
+     
+      
     </div>
   );
 }
