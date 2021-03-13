@@ -8,12 +8,16 @@ import PeopleIcon from '@material-ui/icons/People';
 import ChatIcon from '@material-ui/icons/Chat';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
+import {useStateValue} from '../StateProvider';
+
 
 
 function Sidebar() {
+    const[{user}, dispatch]= useStateValue();
+
     return (
         <div className="sidebar">
-            <Sidebarrow  src="https://static.wikia.nocookie.net/thejusticeworld/images/6/63/Luffy.jpg/revision/latest/scale-to-width-down/340?cb=20110416204724" title="Monkey.D Luffy"/>
+            <Sidebarrow  src={user.photoURL} title={user.displayName}/>
             <Sidebarrow Icon={LocalHospitalIcon}title="COVID-19 Information Center"/>
             <Sidebarrow Icon={EmojiFlagsIcon} title="Pages"/>
             <Sidebarrow Icon={PeopleIcon} title="Friends"/>

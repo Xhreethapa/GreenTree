@@ -4,10 +4,14 @@ import {Avatar} from '@material-ui/core';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+import {useStateValue} from '../StateProvider';
+import db from '../firebase';
+import firebase from "firebase";
 
 
 
     function MessageSender() { 
+        const[{user}, dispatch]= useStateValue();
 
         const [input, setInput] = useState("")
         const [imageUrl, setImageUrl] = useState("")
@@ -18,6 +22,13 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 
     const handleSubmit=(e)=>{
         e.preventDefault();
+        db.collection("posts").add({
+            message:input,
+            timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+            profilePic:user.photoURL,
+            username:user.displayName,
+            image:imageUrl,
+        })
 
         //some database stuff
 
@@ -28,7 +39,7 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
     return (
         <div className="messagesender">
             <div className="messagesender__top">
-                <Avatar/>
+                <Avatar src={user.photoURL}/>
                 <form>
                     <input value={input} 
                            onChange={(e)=> setInput(e.target.value)} className="messagesender__input"  placeholder={"Thinking about Trees??"}/>

@@ -5,10 +5,11 @@ import Sidebar from './Compo/Sidebar';
 import Feed from './Compo/Feed';
 import Widgets from './Compo/Widgets';
 import Login from './Login';
+import {useStateValue} from './StateProvider';
 
 function App() {
 
-  const user= "shree";
+  const [{user}, dispatch] =useStateValue();
 
   return (
     //BEM naming convention
@@ -26,13 +27,9 @@ function App() {
        */}
 
       </div>
-      </>)}
-
-     
-     
+      </>)}     
       
     </div>
   );
 }
-
 export default App;
